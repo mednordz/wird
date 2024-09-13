@@ -1,17 +1,21 @@
 <!DOCTYPE html>
-<html lang="ar">
+<html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>كتابي باللغة العربية</title>
+    <meta name="description" content="كتاب الطريقة البلقايدية الهبرية - ورد وأدعية">
+    <title>كتاب ورد سعادة الدارين</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Amiri&display=swap" rel="stylesheet">
 </head>
 <body>
     <header>
         <nav>
             <ul>
-                <li><a href="#accueil">الصفحة الرئيسية</a></li>
-                <li><a href="#contenu">محتوى الكتاب</a></li>
+                <li><a href="#accueil" aria-label="الصفحة الرئيسية">الصفحة الرئيسية</a></li>
+                <li><a href="#contenu" aria-label="محتوى الكتاب">ورد سعادة الدارين</a></li>
             </ul>
         </nav>
     </header>
@@ -24,7 +28,7 @@
             أسرارهم لمعرفته، وأقامهم بصدق العبودية بين يديه. فَدَلُّوا عليه سبحانه لا على غيره،
             بذكر الله امتثالاً لأمره ومحبَّةً في ذاته، وصلى الله وسلم على نبيه وحبيبه
             ورسوله سيدنا محمد وعلى أهل بيته وصحبه وتابعيه وأحبابه تابعي سنته وهديته إلى
-            يوم الدين..</p>
+            يوم الدين.</p>
             <p>أما بعد..</p>
             <p>فالطريقة البلقايدية الهبرية طريقة صوفية قائمة بالله على كتابه وسنّة نبيه صلى
             الله عليه وسلم وهدي صحابة حبيبه رضوان الله عليهم، مَالِكِيَّة المَذْهَب، أَشْعَرِيَّة
@@ -41,15 +45,18 @@
         </section>
 
         <section id="contenu" style="display: none;">
-            <h2>محتوى الكتاب</h2>
+            <h2>بِسْمِ اللهِ الرَّحْمٰنِ الرَّحِيمِ<br> وَصَلَّى اللهُ عَلَى سَيِّدِنَا مُحَمَّدٍ وَآلِهِ وَصَحْبِهِ وَسَلَّمَ</h2>
             <div id="livre-contenu"></div>
         </section>
     </main>
 
     <footer>
-        <p>&copy; 2023 كتابي باللغة العربية. جميع الحقوق محفوظة.</p>
+        <p>&copy; <span id="current-year"></span> كتاب الطريقة البلقايدية الهبرية. جميع الحقوق محفوظة.</p>
     </footer>
 
     <script src="script.js"></script>
+    <script>
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+    </script>
 </body>
 </html>

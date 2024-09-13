@@ -1,21 +1,72 @@
-// Contenu du livre en arabe
+// Contenu du livre en arabe avec les prières et leurs répétitions
 const contenuLivre = [
     {
-        titre: "الفصل الأول",
-        texte: "هذا هو نص الفصل الأول من الكتاب."
+        titre: "الوِرْدُ اليَوْمِي",
+        texte: "",
+        repetitions: 1
     },
     {
-        titre: "الفصل الثاني",
-        texte: "هذا هو نص الفصل الثاني من الكتاب."
+        titre: "أَعُوذُ بِاللهِ السَّمِيعِ العَلِيمِ مِنَ الشَّيْطَانِ الرَّجِيمِ",
+        texte: "",
+        repetitions: 1
     },
-    // Ajoutez d'autres chapitres ici
+    {
+        titre: "بِسْمِ اللهِ الرَّحْمٰنِ الرَّحِيمِ",
+        texte: "",
+        repetitions: 3
+    },
+    {
+        titre: "وَمَا تُقَدِّمُوا لِأَنفُسِكُم مِّنْ خَيْرٍ تَجِدُوهُ عِندَ اللهِ هُوَ خَيْرًا وَأَعْظَمَ أَجْرًا وَاسْتَغْفِرُوا اللهَ إِنَّ اللهَ غَفُورٌ رَّحِيمٌ",
+        texte: "",
+        repetitions: 1
+    },
+    {
+        titre: "أَسْتَغْفِرُ اللهَ العَظِيمَ الَّذِي لَا إِلٰهَ إِلَّا هُوَ الحَيُّ القَيُّومُ وَأَتُوبُ إِلَيْهِ",
+        texte: "",
+        repetitions: 33
+    },
+    {
+        titre: "إِنَّ اللهَ وَمَلَائِكَتَهُ يُصَلُّونَ عَلَى النَّبِيِّ يَا أَيُّهَا الَّذِينَ آمَنُوا صَلُّوا عَلَيْهِ وَسَلِّمُوا تَسْلِيمًا",
+        texte: "",
+        repetitions: 1
+    },
+    {
+        titre: "اللَّهُمَّ صَلِّ عَلَى سَيِّدِنَا مُحَمَّدٍ عَبْدِكَ وَرَسُولِكَ النَّبِيِّ الأُمِّيِّ وَعَلَى آلِهِ وَصَحْبِهِ وَسَلِّمْ تَسْلِيمًا",
+        texte: "",
+        repetitions: 33
+    },
+    {
+        titre: "فَاعْلَمْ أَنَّهُ لَا إِلٰهَ إِلَّا اللهُ",
+        texte: "",
+        repetitions: 1
+    },
+    {
+        titre: "لَا إِلٰهَ إِلَّا اللهُ وَحْدَهُ لَا شَرِيكَ لَهُ لَهُ المُلْكُ وَلَهُ الحَمْدُ وَهُوَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ",
+        texte: "",
+        repetitions: 33
+    },
+    {
+        titre: "سُورَةُ الإِخْلَاصِ",
+        texte: "قُلْ هُوَ اللَّهُ أَحَدٌ ﴿١﴾ اللَّهُ الصَّمَدُ ﴿٢﴾ لَمْ يَلِدْ وَلَمْ يُولَدْ ﴿٣﴾ وَلَمْ يَكُن لَّهُ كُفُوًا أَحَدٌ ﴿٤﴾",
+        repetitions: 3
+    },
+    {
+        titre: "سُورَةُ الفَاتِحَةِ",
+        texte: "بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ ﴿١﴾ الْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ ﴿٢﴾ الرَّحْمَنِ الرَّحِيمِ ﴿٣﴾ مَالِكِ يَوْمِ الدِّينِ ﴿٤﴾ إِيَّاكَ نَعْبُدُ وَإِيَّاكَ نَسْتَعِينُ ﴿٥﴾ اهْدِنَا الصِّرَاطَ الْمُسْتَقِيمَ ﴿٦﴾ صِرَاطَ الَّذِينَ أَنْعَمْتَ عَلَيْهِمْ غَيْرِ الْمَغْضُوبِ عَلَيْهِمْ وَلَا الضَّالِّينَ ﴿٧﴾",
+        repetitions: 1
+    },
+    {
+        titre: "سُورَةُ الفَتْحِ",
+        texte: "إِنَّا فَتَحْنَا لَكَ فَتْحًا مُّبِينًا ﴿١﴾ لِّيَغْفِرَ لَكَ اللَّهُ مَا تَقَدَّمَ مِن ذَنبِكَ وَمَا تَأَخَّرَ وَيُتِمَّ نِعْمَتَهُ عَلَيْكَ وَيَهْدِيَكَ صِرَاطًا مُّسْتَقِيمًا ﴿٢﴾ وَيَنصُرَكَ اللَّهُ نَصْرًا عَزِيزًا ﴿٣﴾",
+        repetitions: 1
+    }
 ];
 
-// Fonction pour afficher le contenu du livre
+// Fonction pour afficher le contenu du livre de manière interactive
 function afficherContenuLivre() {
     const contenuElement = document.getElementById('livre-contenu');
     contenuElement.innerHTML = ''; // Effacer le contenu existant
-    contenuLivre.forEach(chapitre => {
+    contenuLivre.forEach((chapitre, index) => {
         const chapitreElement = document.createElement('div');
         chapitreElement.classList.add('chapitre');
         
@@ -27,8 +78,37 @@ function afficherContenuLivre() {
         
         chapitreElement.appendChild(titreElement);
         chapitreElement.appendChild(texteElement);
+        
+        if (chapitre.repetitions > 1) {
+            const repetitionsElement = document.createElement('p');
+            repetitionsElement.textContent = `عدد المرات: ${chapitre.repetitions}`;
+            
+            const compteurElement = document.createElement('p');
+            compteurElement.textContent = `العدد الحالي: 0`;
+            
+            const boutonElement = document.createElement('button');
+            boutonElement.textContent = 'قراءة';
+            boutonElement.onclick = () => incrementerCompteur(index, compteurElement);
+            
+            chapitreElement.appendChild(repetitionsElement);
+            chapitreElement.appendChild(compteurElement);
+            chapitreElement.appendChild(boutonElement);
+        }
+        
         contenuElement.appendChild(chapitreElement);
     });
+}
+
+// Fonction pour incrémenter le compteur de lecture
+function incrementerCompteur(index, compteurElement) {
+    let compteur = parseInt(compteurElement.textContent.split(': ')[1]);
+    if (compteur < contenuLivre[index].repetitions) {
+        compteur++;
+        compteurElement.textContent = `العدد الحالي: ${compteur}`;
+    }
+    if (compteur === contenuLivre[index].repetitions) {
+        compteurElement.style.color = 'green';
+    }
 }
 
 // Fonction pour basculer entre les sections avec animation

@@ -1,9 +1,14 @@
 /* Styles généraux */
 
-@import url('https://fonts.googleapis.com/css2?family=Amiri&display=swap');
+@font-face {
+    font-family: 'Didouche';
+    src: url('https://github.com/mednordz/mednordzsov/raw/main/fonts/Didouche_Font.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
 
 body {
-    font-family: 'Amiri', serif;
+    font-family: 'Didouche', 'Amiri', serif;
     line-height: 1.8;
     margin: 0;
     padding: 0;
@@ -24,6 +29,7 @@ header {
 nav ul {
     list-style-type: none;
     padding: 0;
+    margin: 0;
 }
 
 nav ul li {
@@ -36,21 +42,34 @@ nav ul li a {
     text-decoration: none;
     font-weight: bold;
     font-size: 20px;
+    transition: color 0.3s ease, transform 0.2s ease;
+    display: inline-block;
+}
+
+nav ul li a:hover {
+    color: #6b5b3d;
+    transform: translateY(-2px);
 }
 
 main {
     padding: 1rem;
     background-color: #f8f3e3;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     margin: 0.5rem;
-    border-radius: 5px;
+    border-radius: 8px;
+}
+
+main section {
+    opacity: 0;
+    transition: opacity 0.3s ease;
 }
 
 h1, h2 {
     color: #6b5b3d;
-    font-family: 'Amiri', serif;
+    font-family: 'Didouche', 'Amiri', serif;
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
     font-size: 24px;
+    margin-bottom: 1rem;
 }
 
 /* Styles spécifiques pour le contenu du livre */
@@ -62,8 +81,29 @@ h1, h2 {
 
 .chapitre h3 {
     color: #6b5b3d;
-    font-family: 'Amiri', serif;
+    font-family: 'Didouche', 'Amiri', serif;
     font-size: 22px;
+    margin-bottom: 0.5rem;
+}
+
+.chapitre p {
+    margin-bottom: 0.5rem;
+}
+
+.chapitre button {
+    background-color: #8c7a5b;
+    color: #fff;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    font-family: 'Didouche', 'Amiri', serif;
+}
+
+.chapitre button:hover {
+    background-color: #6b5b3d;
+    transform: translateY(-2px);
 }
 
 /* Styles pour le pied de page */
@@ -74,21 +114,23 @@ footer {
     padding: 1rem;
     position: fixed;
     bottom: 0;
+    left: 0;
     width: 100%;
     border-top: 2px solid #8c7a5b;
     font-size: 16px;
 }
 
-/* Styles pour les appareils mobiles */
+/* Styles pour les appareils mobiles et desktop */
 @media (min-width: 769px) {
     nav ul li {
-        display: inline;
+        display: inline-block;
         margin-right: 1rem;
     }
     
     main {
         padding: 2rem;
-        margin: 1rem;
+        margin: 1rem auto;
+        max-width: 800px;
     }
     
     body {
@@ -106,4 +148,29 @@ footer {
     nav ul li a {
         font-size: 18px;
     }
+}
+
+@media (max-width: 768px) {
+    body {
+        font-size: 16px;
+    }
+    
+    h1, h2 {
+        font-size: 22px;
+    }
+    
+    .chapitre h3 {
+        font-size: 20px;
+    }
+    
+    nav ul li a {
+        font-size: 18px;
+    }
+}
+
+/* Style pour le titre spécifique */
+#contenu h2 {
+    font-size: 32px;
+    text-align: center;
+    margin-bottom: 2rem;
 }
