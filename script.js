@@ -14,6 +14,7 @@ const contenuLivre = [
 // Fonction pour afficher le contenu du livre
 function afficherContenuLivre() {
     const contenuElement = document.getElementById('livre-contenu');
+    contenuElement.innerHTML = ''; // Effacer le contenu existant
     contenuLivre.forEach(chapitre => {
         const chapitreElement = document.createElement('div');
         chapitreElement.classList.add('chapitre');
@@ -30,11 +31,21 @@ function afficherContenuLivre() {
     });
 }
 
-// Fonction pour basculer entre les sections
+// Fonction pour basculer entre les sections avec animation
 function basculerSection(sectionId) {
     const sections = document.querySelectorAll('main section');
     sections.forEach(section => {
-        section.style.display = section.id === sectionId ? 'block' : 'none';
+        if (section.id === sectionId) {
+            section.style.display = 'block';
+            setTimeout(() => {
+                section.style.opacity = '1';
+            }, 50);
+        } else {
+            section.style.opacity = '0';
+            setTimeout(() => {
+                section.style.display = 'none';
+            }, 300);
+        }
     });
 }
 
@@ -54,4 +65,36 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // Afficher la section d'accueil par défaut
     basculerSection('accueil');
+
+    // Ajout de la gestion du défilement fluide
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            document.querySelector(this.getAttribute('href')).scrollIntoView({
+                behavior: 'smooth'
+            });
+        });
+    });
+
+    // Optimisation pour les appareils mobiles
+    if ('ontouchstart' in window) {
+        document.body.classList.add('touch-device');
+    }
 });
+
+// Fonction pour ajuster la taille du texte
+function ajusterTailleTexte(taille) {
+    document.body.style.fontSize = taille + 'px';
+}
+
+// Ajout des boutons pour ajuster la taille du texte
+const boutonsPlusGrand = document.createElement('button');
+boutonsPlusGrand.textContent = 'A+';
+boutonsPlusGrand.onclick = () => ajusterTailleTexte(parseInt(getComputedStyle(document.body).fontSize) + 2);
+
+const boutonsPlusPetit = document.createElement('button');
+boutonsPlusPetit.textContent = 'A-';
+boutonsPlusPetit.onclick = () => ajusterTailleTexte(parseInt(getComputedStyle(document.body).fontSize) - 2);
+
+document.querySelector('header').appendChild(boutonsPlusGrand);
+document.querySelector('header').appendChild(boutonsPlusPetit);
