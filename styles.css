@@ -40,7 +40,23 @@ header {
     padding-bottom: 20px;
 }
 
-header img { }
+/* Styles pour les images d'en-tête */
+.header-images {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.header-image {
+    max-width: 30%;
+    height: auto;
+}
+
+.header-image.logo {
+    max-width: 20%;
+}
 
 /* Typographie */
 p {
@@ -219,20 +235,17 @@ button:hover::before {
     }
 }
 
-.header-image {
-    max-width: 50%;
-    height: auto;
-    margin-bottom: 20px;
+/* Media query pour les appareils mobiles */
+@media (max-width: 767px) {
+    .header-images {
+        flex-direction: column;
+    }
+
+    .header-image, .header-image.logo {
+        max-width: 100%;
+        margin-bottom: 10px;
+    }
 }
 
-/* Styles pour la bassmala */
-.bassmala {
-    font-family: 'Scheherazade New', 'Amiri', 'Noto Naskh Arabic', serif;
-    font-size: 2rem;
-    text-align: center;
-    direction: rtl;
-    line-height: 1.8;
-    color: #122014;
-    margin-bottom: 30px;
-    text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
-}
+/* Suppression des styles spécifiques à l'ancienne image */
+/* header img { } */
