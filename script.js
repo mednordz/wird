@@ -1,180 +1,123 @@
-// Contenu du livre en arabe avec les prières et leurs répétitions
-const contenuLivre = [
-    {
-        titre: "الوِرْدُ اليَوْمِي",
-        texte: "",
-        repetitions: 1
-    },
-    {
-        titre: "أَعُوذُ بِاللهِ السَّمِيعِ العَلِيمِ مِنَ الشَّيْطَانِ الرَّجِيمِ",
-        texte: "",
-        repetitions: 1
-    },
-    {
-        titre: "بِسْمِ اللهِ الرَّحْمٰنِ الرَّحِيمِ",
-        texte: "",
-        repetitions: 3
-    },
-    {
-        titre: "وَمَا تُقَدِّمُوا لِأَنفُسِكُم مِّنْ خَيْرٍ تَجِدُوهُ عِندَ اللهِ هُوَ خَيْرًا وَأَعْظَمَ أَجْرًا وَاسْتَغْفِرُوا اللهَ إِنَّ اللهَ غَفُورٌ رَّحِيمٌ",
-        texte: "",
-        repetitions: 1
-    },
-    {
-        titre: "أَسْتَغْفِرُ اللهَ العَظِيمَ الَّذِي لَا إِلٰهَ إِلَّا هُوَ الحَيُّ القَيُّومُ وَأَتُوبُ إِلَيْهِ",
-        texte: "",
-        repetitions: 33
-    },
-    {
-        titre: "إِنَّ اللهَ وَمَلَائِكَتَهُ يُصَلُّونَ عَلَى النَّبِيِّ يَا أَيُّهَا الَّذِينَ آمَنُوا صَلُّوا عَلَيْهِ وَسَلِّمُوا تَسْلِيمًا",
-        texte: "",
-        repetitions: 1
-    },
-    {
-        titre: "اللَّهُمَّ صَلِّ عَلَى سَيِّدِنَا مُحَمَّدٍ عَبْدِكَ وَرَسُولِكَ النَّبِيِّ الأُمِّيِّ وَعَلَى آلِهِ وَصَحْبِهِ وَسَلِّمْ تَسْلِيمًا",
-        texte: "",
-        repetitions: 33
-    },
-    {
-        titre: "فَاعْلَمْ أَنَّهُ لَا إِلٰهَ إِلَّا اللهُ",
-        texte: "",
-        repetitions: 1
-    },
-    {
-        titre: "لَا إِلٰهَ إِلَّا اللهُ وَحْدَهُ لَا شَرِيكَ لَهُ لَهُ المُلْكُ وَلَهُ الحَمْدُ وَهُوَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ",
-        texte: "",
-        repetitions: 33
-    },
-    {
-        titre: "سُورَةُ الإِخْلَاصِ",
-        texte: "قُلْ هُوَ اللَّهُ أَحَدٌ ﴿١﴾ اللَّهُ الصَّمَدُ ﴿٢﴾ لَمْ يَلِدْ وَلَمْ يُولَدْ ﴿٣﴾ وَلَمْ يَكُن لَّهُ كُفُوًا أَحَدٌ ﴿٤﴾",
-        repetitions: 3
-    },
-    {
-        titre: "سُورَةُ الفَاتِحَةِ",
-        texte: "بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ ﴿١﴾ الْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ ﴿٢﴾ الرَّحْمَنِ الرَّحِيمِ ﴿٣﴾ مَالِكِ يَوْمِ الدِّينِ ﴿٤﴾ إِيَّاكَ نَعْبُدُ وَإِيَّاكَ نَسْتَعِينُ ﴿٥﴾ اهْدِنَا الصِّرَاطَ الْمُسْتَقِيمَ ﴿٦﴾ صِرَاطَ الَّذِينَ أَنْعَمْتَ عَلَيْهِمْ غَيْرِ الْمَغْضُوبِ عَلَيْهِمْ وَلَا الضَّالِّينَ ﴿٧﴾",
-        repetitions: 1
-    },
-    {
-        titre: "سُورَةُ الفَتْحِ",
-        texte: "إِنَّا فَتَحْنَا لَكَ فَتْحًا مُّبِينًا ﴿١﴾ لِّيَغْفِرَ لَكَ اللَّهُ مَا تَقَدَّمَ مِن ذَنبِكَ وَمَا تَأَخَّرَ وَيُتِمَّ نِعْمَتَهُ عَلَيْكَ وَيَهْدِيَكَ صِرَاطًا مُّسْتَقِيمًا ﴿٢﴾ وَيَنصُرَكَ اللَّهُ نَصْرًا عَزِيزًا ﴿٣﴾",
-        repetitions: 1
-    }
+const wirdContent = [
+    { text: "أَعُوذُ بِاللهِ السَّمِيعِ العَلِيمِ مِنَ الشَّيْطَانِ الرَّجِيمِ", repeat: 1 },
+    { text: "بِسْمِ اللهِ الرَّحْمٰنِ الرَّحِيمِ", repeat: 3 },
+    { text: "وَمَا تُقَدِّمُواْ لِأَنفُسِكُم مِّنْ خَيْرٖ تَجِدُوهُ عِندَ اَ۬للَّهِ هُوَ خَيْراٗ وَأَعْظَمَ أَجْراٗۖ وَاسْتَغْفِرُواْ اُ۬للَّهَۖ إِنَّ اَ۬للَّهَ غَفُورٞ رَّحِيمٞۖ", repeat: 1, quran: true },
+    { text: "أَسْتَغْفِرُ اللهَ العَظِيمَ الَّذِي لَا إِلٰهَ إِلَّا هُوَ الحَيُّ القَيُّومُ وَأَتُوبُ إِلَيْهِ", repeat: 33 },
+    { text: "اِنَّ اَ۬للَّهَ وَمَلَٰٓئِكَتَهُۥ يُصَلُّونَ عَلَى اَ۬لنَّبِےٓءِۖ يَٰٓأَيُّهَا اَ۬لذِينَ ءَامَنُواْ صَلُّواْ عَلَيْهِ وَسَلِّمُواْ تَسْلِيماًۖ", repeat: 1, quran: true },
+    { text: "اللَّهُمَّ صَلِّ عَلَى سَيِّدِنَا مُحَمَّدٍ عَبْدِكَ وَرَسُولِكَ النَّبِيِّ الأُمِّيِّ وَعَلَى آلِهِ وَصَحْبِهِ وَسَلِّمْ تَسْلِيمًا", repeat: 33 },
+    { text: "فَاعْلَمَ اَنَّهُۥ لَآ إِلَٰهَ إِلَّا اَ۬للَّهُ", repeat: 1, quran: true },
+    { text: "لَا إِلٰهَ إِلَّا اللهُ وَحْدَهُ لَا شَرِيكَ لَهُ لَهُ المُلْكُ وَلَهُ الحَمْدُ وَهُوَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ", repeat: 33 },
+    { text: "سُورَةُ الإِخْلَاصِ", repeat: 3, surah: true },
+    { text: "سُورَةُ الفَاتِحَةِ", repeat: 1, surah: true },
+    { text: "سُورَةُ الفَتْحِ", repeat: 1, link: "surah-al-fath.html" }
 ];
 
-// Fonction pour afficher le contenu du livre de manière interactive
-function afficherContenuLivre() {
-    const contenuElement = document.getElementById('livre-contenu');
-    contenuElement.innerHTML = ''; // Effacer le contenu existant
-    contenuLivre.forEach((chapitre, index) => {
-        const chapitreElement = document.createElement('div');
-        chapitreElement.classList.add('chapitre');
-        
-        const titreElement = document.createElement('h3');
-        titreElement.textContent = chapitre.titre;
-        
-        const texteElement = document.createElement('p');
-        texteElement.textContent = chapitre.texte;
-        
-        chapitreElement.appendChild(titreElement);
-        chapitreElement.appendChild(texteElement);
-        
-        if (chapitre.repetitions > 1) {
-            const repetitionsElement = document.createElement('p');
-            repetitionsElement.textContent = `عدد المرات: ${chapitre.repetitions}`;
-            
-            const compteurElement = document.createElement('p');
-            compteurElement.textContent = `العدد الحالي: 0`;
-            
-            const boutonElement = document.createElement('button');
-            boutonElement.textContent = 'قراءة';
-            boutonElement.onclick = () => incrementerCompteur(index, compteurElement);
-            
-            chapitreElement.appendChild(repetitionsElement);
-            chapitreElement.appendChild(compteurElement);
-            chapitreElement.appendChild(boutonElement);
-        }
-        
-        contenuElement.appendChild(chapitreElement);
-    });
-}
-
-// Fonction pour incrémenter le compteur de lecture
-function incrementerCompteur(index, compteurElement) {
-    let compteur = parseInt(compteurElement.textContent.split(': ')[1]);
-    if (compteur < contenuLivre[index].repetitions) {
-        compteur++;
-        compteurElement.textContent = `العدد الحالي: ${compteur}`;
-    }
-    if (compteur === contenuLivre[index].repetitions) {
-        compteurElement.style.color = 'green';
-    }
-}
-
-// Fonction pour basculer entre les sections avec animation
-function basculerSection(sectionId) {
-    const sections = document.querySelectorAll('main section');
-    sections.forEach(section => {
-        if (section.id === sectionId) {
-            section.style.display = 'block';
-            setTimeout(() => {
-                section.style.opacity = '1';
-            }, 50);
-        } else {
-            section.style.opacity = '0';
-            setTimeout(() => {
-                section.style.display = 'none';
-            }, 300);
-        }
-    });
-}
-
-// Gestionnaires d'événements pour la navigation
-document.addEventListener('DOMContentLoaded', () => {
-    const liens = document.querySelectorAll('nav a');
-    liens.forEach(lien => {
-        lien.addEventListener('click', (e) => {
-            e.preventDefault();
-            const sectionId = lien.getAttribute('href').substring(1);
-            basculerSection(sectionId);
-            if (sectionId === 'contenu') {
-                afficherContenuLivre();
-            }
-        });
-    });
+function createWirdItem(item, index) {
+    const div = document.createElement('div');
+    div.className = 'wird-item';
     
-    // Afficher la section d'accueil par défaut
-    basculerSection('accueil');
+    const text = document.createElement('p');
+    text.textContent = item.text;
+    if (item.quran) text.classList.add('quran');
+    div.appendChild(text);
 
-    // Ajout de la gestion du défilement fluide
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-            e.preventDefault();
-            document.querySelector(this.getAttribute('href')).scrollIntoView({
-                behavior: 'smooth'
-            });
-        });
-    });
-
-    // Optimisation pour les appareils mobiles
-    if ('ontouchstart' in window) {
-        document.body.classList.add('touch-device');
+    if (item.surah) {
+        const surahText = document.createElement('p');
+        surahText.textContent = getSurahText(item.text);
+        surahText.classList.add('quran');
+        div.appendChild(surahText);
     }
-});
 
-// Fonction pour ajuster la taille du texte
-function ajusterTailleTexte(taille) {
-    document.body.style.fontSize = taille + 'px';
+    if (item.link) {
+        const link = document.createElement('a');
+        link.href = item.link;
+        link.textContent = 'اقرأ السورة كاملة';
+        div.appendChild(link);
+    }
+
+    if (item.repeat > 1) {
+        const counter = createCounter(item.repeat);
+        div.appendChild(counter);
+    }
+
+    return div;
 }
 
-// Ajout des boutons pour ajuster la taille du texte
-const boutonsPlusGrand = document.createElement('button');
-boutonsPlusGrand.textContent = 'A+';
-boutonsPlusGrand.onclick = () => ajusterTailleTexte(parseInt(getComputedStyle(document.body).fontSize) + 2);
+function getSurahText(surahName) {
+    // Ici, vous devriez ajouter le texte complet des sourates
+    // Pour cet exemple, je vais juste retourner un texte placeholder
+    return "بِسْمِ اِ۬للَّهِ اِ۬لرَّحْمَٰنِ اِ۬لرَّحِيمِ قُلْ هُوَ اَ۬للَّهُ أَحَدٌۖ ١ اِ۬للَّهُ اُ۬لصَّمَدُۖ ٢ لَمْ يَلِدْ وَلَمْ يُولَدْۖ ٣ وَلَمْ يَكُن لَّهُۥ كُفُؤاً اَحَدٞۖ ٤";
+}
 
-const boutonsPlusPetit = document.createElement('button');
-boutonsPlusPetit.textContent = 'A-';
-boutonsPlusPetit.onclick = () => ajusterTailleTexte(parseInt(getComputedStyle(document.body).fontSize) - 2);
+function createCounter(maxCount) {
+    const counter = document.createElement('div');
+    counter.className = 'counter';
+    
+    const increaseBtn = document.createElement('button');
+    increaseBtn.className = 'increase-btn';
+    increaseBtn.textContent = '0/' + maxCount;
+    counter.appendChild(increaseBtn);
 
-document.querySelector('header').appendChild(boutonsPlusGrand);
-document.querySelector('header').appendChild(boutonsPlusPetit);
+    const resetBtn = document.createElement('button');
+    resetBtn.textContent = 'إعادة';
+    resetBtn.className = 'reset-btn';
+    counter.appendChild(resetBtn);
+
+    let currentCount = 0;
+    
+    function updateCount() {
+        increaseBtn.textContent = currentCount + '/' + maxCount;
+        if (currentCount === maxCount) {
+            counter.classList.add('completed');
+        } else {
+            counter.classList.remove('completed');
+        }
+    }
+
+    increaseBtn.addEventListener('click', () => {
+        if (currentCount < maxCount) {
+            currentCount++;
+            updateCount();
+        }
+    });
+
+    resetBtn.addEventListener('click', () => {
+        currentCount = 0;
+        updateCount();
+    });
+
+    return counter;
+}
+
+function initializeWird() {
+    const wirdContainer = document.getElementById('wird');
+    wirdContent.forEach((item, index) => {
+        const wirdItem = createWirdItem(item, index);
+        wirdContainer.appendChild(wirdItem);
+    });
+}
+
+document.addEventListener('DOMContentLoaded', initializeWird);
+
+document.addEventListener('DOMContentLoaded', function() {
+    const overlay = document.getElementById('animation-overlay');
+    const img = overlay.querySelector('img');
+
+    // Afficher l'image avec une animation
+    setTimeout(() => {
+        img.style.opacity = '1';
+        img.style.transform = 'scale(1) rotate(0deg)';
+    }, 300);
+
+    // Faire disparaître l'overlay après 4 secondes
+    setTimeout(() => {
+        overlay.classList.add('fade-out');
+    }, 4000);
+
+    // Supprimer complètement l'overlay après la fin de l'animation
+    overlay.addEventListener('transitionend', function(e) {
+        if (e.propertyName === 'opacity' && this.classList.contains('fade-out')) {
+            this.remove();
+        }
+    });
+});
