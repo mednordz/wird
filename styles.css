@@ -56,9 +56,7 @@ h1, h2, h3 {
 
 h1 { font-size: 2em; }
 h2 { font-size: 2em; }
-h3 {
-    font-size: 2em;
-}
+h3 {font-size: 2em; }
 
 /* Styles spécifiques pour le texte coranique */
 .quran {
@@ -200,8 +198,8 @@ button:hover::before {
 #animation-overlay::before {
     content: '';
     position: absolute;
-    width: 100%;
-    height: 100%;
+    width: 50%;
+    height: 50%;
     background: radial-gradient(circle, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0) 70%);
     animation: pulse 2s infinite;
     pointer-events: none;
@@ -220,7 +218,7 @@ button:hover::before {
 }
 
 .header-image {
-    max-width: 100%;
+    max-width: 50%;
     height: auto;
     margin-bottom: 20px;
 }
@@ -238,7 +236,7 @@ h3 {
 /* Styles pour la bassmala */
 .bassmala {
     font-family: 'Scheherazade New', 'Amiri', 'Noto Naskh Arabic', serif;
-    font-size: 3rem;
+    font-size: 2rem;
     text-align: center;
     direction: rtl;
     line-height: 1.8;
