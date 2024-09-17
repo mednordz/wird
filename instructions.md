@@ -3,7 +3,7 @@
 ## Structure du projet
 - Fichiers à créer : `index.html`, `styles.css`, `script.js`, `surah-al-fath.html`
 - Fichier de police : `UthmanicWarsh V21.ttf`
-- Emplacement du projet : `/ProjetWirdT`
+- Emplacement du projet : `/wird`
 
 ## Spécifications générales
 

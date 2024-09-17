@@ -40,6 +40,8 @@ header {
     padding-bottom: 20px;
 }
 
+header img { }
+
 /* Typographie */
 p {
     margin-bottom: 1.5em;
@@ -48,15 +50,15 @@ p {
 
 h1, h2, h3 {
     font-family: 'Didouche','Scheherazade', serif;
-    color: #8B4513;
+    color: #122014;
     text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
     margin-bottom: 0.7em;
     text-align: center;
 }
 
-h1 { font-size: 2em; }
-h2 { font-size: 2em; }
-h3 {font-size: 2em; }
+h1 { font-size: 1.6em; }
+h2 { font-size: 1.6em; }
+h3 { font-size: 1.4em; }
 
 /* Styles spécifiques pour le texte coranique */
 .quran {
@@ -64,17 +66,17 @@ h3 {font-size: 2em; }
     font-size: 28px;
     line-height: 2.2;
     text-align: justify;
-    margin-bottom: 30px;
+    margin-bottom: 10px;
     color: #2c1f0f;
     text-shadow: 1px 1px 1px rgba(0,0,0,0.05);
 }
 
 /* Styles pour les éléments du wird */
 .wird-item {
-    margin-bottom: 40px;
-    padding: 30px;
-    background-color: rgba(249, 243, 231, 0.7);
-    border-radius: 5px;
+    margin-bottom: 15px;
+    padding: 20px;
+    background-color: rgba(235, 227, 195, 0.088);
+    border-radius: 10px 10px 0 40px;
     box-shadow: 0 4px 8px rgba(139, 69, 19, 0.1);
     border: 1px solid rgba(211, 197, 168, 0.5);
 }
@@ -223,16 +225,6 @@ button:hover::before {
     margin-bottom: 20px;
 }
 
-/* Mise à jour du style pour h3 */
-h3 {
-    font-family: 'Didouche','Scheherazade', serif;
-    color: #8B4513;
-    text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
-    margin-bottom: 0.7em;
-    text-align: center;
-    font-size: 2em;
-}
-
 /* Styles pour la bassmala */
 .bassmala {
     font-family: 'Scheherazade New', 'Amiri', 'Noto Naskh Arabic', serif;
@@ -240,7 +232,7 @@ h3 {
     text-align: center;
     direction: rtl;
     line-height: 1.8;
-    color: #8B4513;
+    color: #122014;
     margin-bottom: 30px;
     text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
 }
