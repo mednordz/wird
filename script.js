@@ -59,7 +59,8 @@ function createCounter(maxCount) {
     counter.appendChild(countDisplay);
 
     let currentCount = 0;
-    
+    let isInitial = true;
+
     function updateCount() {
         countDisplay.textContent = currentCount + '/' + maxCount;
         if (currentCount === maxCount) {
@@ -69,13 +70,32 @@ function createCounter(maxCount) {
         }
     }
 
+    function showOptions() {
+        const options = [11, 33, 99, 100];
+        const optionsContainer = document.createElement('div');
+        optionsContainer.className = 'counter-options';
+        options.forEach(option => {
+            const button = document.createElement('button');
+            button.textContent = option;
+            button.addEventListener('click', () => {
+                maxCount = option;
+                updateCount();
+                optionsContainer.remove();
+                isInitial = false;
+            });
+            optionsContainer.appendChild(button);
+        });
+        counter.appendChild(optionsContainer);
+    }
+
     counter.addEventListener('click', (event) => {
-        event.stopPropagation(); // Empêche le clic de se propager à l'élément parent
-        if (currentCount < maxCount) {
+        event.stopPropagation();
+        if (isInitial && maxCount === 33) {
+            showOptions();
+        } else if (currentCount < maxCount) {
             currentCount++;
             updateCount();
         } else {
-            // Réinitialiser le compteur si on clique après avoir atteint le maximum
             currentCount = 0;
             updateCount();
         }
