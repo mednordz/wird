@@ -53,20 +53,15 @@ function createCounter(maxCount) {
     const counter = document.createElement('div');
     counter.className = 'counter';
     
-    const increaseBtn = document.createElement('button');
-    increaseBtn.className = 'increase-btn';
-    increaseBtn.textContent = '0/' + maxCount;
-    counter.appendChild(increaseBtn);
-
-    const resetBtn = document.createElement('button');
-    resetBtn.textContent = 'إعادة';
-    resetBtn.className = 'reset-btn';
-    counter.appendChild(resetBtn);
+    const countDisplay = document.createElement('span');
+    countDisplay.className = 'count-display';
+    countDisplay.textContent = '0/' + maxCount;
+    counter.appendChild(countDisplay);
 
     let currentCount = 0;
     
     function updateCount() {
-        increaseBtn.textContent = currentCount + '/' + maxCount;
+        countDisplay.textContent = currentCount + '/' + maxCount;
         if (currentCount === maxCount) {
             counter.classList.add('completed');
         } else {
@@ -74,16 +69,16 @@ function createCounter(maxCount) {
         }
     }
 
-    increaseBtn.addEventListener('click', () => {
+    counter.addEventListener('click', (event) => {
+        event.stopPropagation(); // Empêche le clic de se propager à l'élément parent
         if (currentCount < maxCount) {
             currentCount++;
             updateCount();
+        } else {
+            // Réinitialiser le compteur si on clique après avoir atteint le maximum
+            currentCount = 0;
+            updateCount();
         }
-    });
-
-    resetBtn.addEventListener('click', () => {
-        currentCount = 0;
-        updateCount();
     });
 
     return counter;
@@ -94,6 +89,16 @@ function initializeWird() {
     wirdContent.forEach((item, index) => {
         const wirdItem = createWirdItem(item, index);
         wirdContainer.appendChild(wirdItem);
+    });
+
+    // Modifiez cette partie pour rendre les éléments wird cliquables
+    document.querySelectorAll('.wird-item').forEach(item => {
+        const counter = item.querySelector('.counter');
+        if (counter) {
+            item.addEventListener('click', () => {
+                counter.click();
+            });
+        }
     });
 }
 
@@ -118,6 +123,30 @@ document.addEventListener('DOMContentLoaded', function() {
     overlay.addEventListener('transitionend', function(e) {
         if (e.propertyName === 'opacity' && this.classList.contains('fade-out')) {
             this.remove();
+        }
+    });
+});
+
+// Supprimez ou commentez ces lignes si elles existent
+// document.getElementById('count-button').addEventListener('click', () => {
+//     incrementWirdCount(currentWirdId);
+//     updateWirdDisplay(currentWirdId);
+// });
+
+document.addEventListener('DOMContentLoaded', function() {
+    const showMoreBtn = document.getElementById('showMoreBtn');
+    const shortText = document.querySelector('.short-text');
+    const fullText = document.querySelector('.full-text');
+
+    showMoreBtn.addEventListener('click', function() {
+        if (fullText.style.display === 'none') {
+            fullText.style.display = 'inline';
+            shortText.style.display = 'none';
+            showMoreBtn.textContent = 'عرض أقل';
+        } else {
+            fullText.style.display = 'none';
+            shortText.style.display = 'inline';
+            showMoreBtn.textContent = 'عرض المزيد';
         }
     });
 });
