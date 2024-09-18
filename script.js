@@ -78,10 +78,22 @@ function createCounter(maxCount) {
             const button = document.createElement('button');
             button.textContent = option;
             button.addEventListener('click', () => {
+                const oldMaxCount = maxCount;
                 maxCount = option;
                 updateCount();
                 optionsContainer.remove();
                 isInitial = false;
+
+                // Mettre à jour tous les autres compteurs avec la même valeur initiale
+                if (oldMaxCount === 33) {
+                    document.querySelectorAll('.counter').forEach(otherCounter => {
+                        const otherCountDisplay = otherCounter.querySelector('.count-display');
+                        if (otherCountDisplay.textContent === '0/33') {
+                            otherCounter.maxCount = option;
+                            otherCountDisplay.textContent = '0/' + option;
+                        }
+                    });
+                }
             });
             optionsContainer.appendChild(button);
         });

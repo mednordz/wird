@@ -364,8 +364,7 @@ button:hover::before {
 /* Styles pour les options de compteur */
 .counter-options {
     position: absolute;
-    background-color: white;
-    border: 1px solid #ccc;
+
     border-radius: 5px;
     padding: 5px;
     display: flex;
@@ -376,13 +375,13 @@ button:hover::before {
 .counter-options button {
     margin: 2px;
     padding: 5px 10px;
-    background-color: #f0f0f0;
+    background-color: #2d3f35;
     border: none;
     cursor: pointer;
 }
 
 .counter-options button:hover {
-    background-color: #e0e0e0;
+    background-color: #1c5420;
 }
 
 /* ... reste du code ... */
