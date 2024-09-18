@@ -4,12 +4,12 @@ const wirdContent = [
     { text: "وَمَا تُقَدِّمُواْ لِأَنفُسِكُم مِّنْ خَيْرٖ تَجِدُوهُ عِندَ اَ۬للَّهِ هُوَ خَيْراٗ وَأَعْظَمَ أَجْراٗۖ وَاسْتَغْفِرُواْ اُ۬للَّهَۖ إِنَّ اَ۬للَّهَ غَفُورٞ رَّحِيمٞۖ", repeat: 1, quran: true },
     { text: "أَسْتَغْفِرُ اللهَ العَظِيمَ الَّذِي لَا إِلٰهَ إِلَّا هُوَ الحَيُّ القَيُّومُ وَأَتُوبُ إِلَيْهِ", repeat: 33 },
     { text: "اِنَّ اَ۬للَّهَ وَمَلَٰٓئِكَتَهُۥ يُصَلُّونَ عَلَى اَ۬لنَّبِےٓءِۖ يَٰٓأَيُّهَا اَ۬لذِينَ ءَامَنُواْ صَلُّواْ عَلَيْهِ وَسَلِّمُواْ تَسْلِيماًۖ", repeat: 1, quran: true },
-    { text: "اللَّهُمَّ صَلِّ عَلَى سَيِّدِنَا مُحَمَّدٍ عَبْدِكَ وَرَسُولِكَ النَّبِيِّ الأُمِّيِّ وَعَلَى آلِهِ وَصَحْبِهِ وَسَلِّمْ تَسْلِيمًا", repeat: 33 },
+    { text: "اللَّهُمَّ صَلِّ عَلَى سَيِِّنَا مُحَمَّدٍ عَبْدِكَ وَرَسُولِكَ النَّبِيِّ الأُمِّيِّ وَعَلَى آلِهِ وَصَحْبِهِ وَسَلِّمْ تَسْلِيمًا", repeat: 33 },
     { text: "فَاعْلَمَ اَنَّهُۥ لَآ إِلَٰهَ إِلَّا اَ۬للَّهُ", repeat: 1, quran: true },
     { text: "لَا إِلٰهَ إِلَّا اللهُ وَحْدَهُ لَا شَرِيكَ لَهُ لَهُ المُلْكُ وَلَهُ الحَمْدُ وَهُوَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ", repeat: 33 },
     { text: "سُورَةُ الإِخْلَاصِ", repeat: 3, surah: true },
     { text: "سُورَةُ الفَاتِحَةِ", repeat: 1, surah: true },
-    { text: "سُورَةُ الفَتْحِ", repeat: 1, link: "surah-al-fath.html" }
+    { text: "سُورَةُ الفَتْحِ", repeat: 1, surah: true }
 ];
 
 function createWirdItem(item, index) {
@@ -23,20 +23,32 @@ function createWirdItem(item, index) {
 
     if (item.surah) {
         const surahText = document.createElement('p');
-        surahText.textContent = getSurahText(item.text);
-        surahText.classList.add('quran');
+        surahText.classList.add('quran', 'full-surah');
+        surahText.style.display = 'none';
         div.appendChild(surahText);
-    }
 
-    if (item.link) {
-        const link = document.createElement('a');
-        link.href = item.link;
-        link.textContent = 'اقرأ السورة كاملة';
-        div.appendChild(link);
+        if (item.text === "سُورَةُ الفَتْحِ") {
+            getSuratAlFath().then(fullText => {
+                surahText.textContent = fullText;
+            });
+        } else {
+            surahText.textContent = getSurahText(item.text);
+        }
+
+        text.addEventListener('click', (e) => {
+            e.stopPropagation();
+            if (surahText.style.display === 'none') {
+                surahText.style.display = 'block';
+                text.style.display = 'none';
+            } else {
+                surahText.style.display = 'none';
+                text.style.display = 'block';
+            }
+        });
     }
 
     if (item.repeat > 1) {
-        const counter = createCounter(item.repeat);
+        const counter = createCounter(item.repeat, index);
         div.appendChild(counter);
     }
 
@@ -44,22 +56,35 @@ function createWirdItem(item, index) {
 }
 
 function getSurahText(surahName) {
-    // Ici, vous devriez ajouter le texte complet des sourates
-    // Pour cet exemple, je vais juste retourner un texte placeholder
-    return "بِسْمِ اِ۬للَّهِ اِ۬لرَّحْمَٰنِ اِ۬لرَّحِيمِ قُلْ هُوَ اَ۬للَّهُ أَحَدٌۖ ١ اِ۬للَّهُ اُ۬لصَّمَدُۖ ٢ لَمْ يَلِدْ وَلَمْ يُولَدْۖ ٣ وَلَمْ يَكُن لَّهُۥ كُفُؤاً اَحَدٞۖ ٤";
+    const surahTexts = {
+        "سُورَةُ الإِخْلَاصِ": "قُلْ هُوَ اَ۬للَّهُ أَحَدٌۖ ١ اِ۬للَّهُ اُ۬لصَّمَدُۖ ٢ لَمْ يَلِدْ وَلَمْ يُولَدْۖ ٣ وَلَمْ يَكُن لَّهُۥ كُفُؤاً اَحَدٞۖ ٤",
+        "سُورَةُ الفَاتِحَةِ": "بِسْمِ اِ۬للَّهِ اِ۬لرَّحْمَٰنِ اِ۬لرَّحِيمِ اِ۬لْحَمْدُ لِلهِ رَبِّ اِ۬لْعَٰلَمِينَ ١ اَ۬لرَّحْمَٰنِ اِ۬لرَّحِيمِ ٢مَلِكِ يَوْمِ اِ۬لدِّينِۖ ٣ إِيَّاكَ نَعْبُدُ وَإِيَّاكَ نَسْتَعِينُۖ ٤ اُ۪هْدِنَا اَ۬لصِّرَٰطَ اَ۬لْمُسْتَقِيمَ ٥ صِرَٰطَ اَ۬لذِينَ أَنْعَمْتَ عَلَيْهِمْ ٦ غَيْرِ اِ۬لْمَغْضُوبِ عَلَيْهِمْ وَلَا اَ۬لضَّآلِّينَۖ ",
+    };
+    return surahTexts[surahName] || (surahName === "سُورَةُ الفَتْحِ" ? getSuratAlFath() : "Texte de la sourate non disponible");
 }
 
-function createCounter(maxCount) {
+function getSuratAlFath() {
+    return fetch('SuratAlFath.json')
+        .then(response => response.json())
+        .then(data => {
+            return data.verses.map(verse => `${verse.text}`).join('\n\n');
+        })
+        .catch(error => {
+            console.error('Erreur lors du chargement de Surat Al-Fath:', error);
+            return "Erreur lors du chargement de Surat Al-Fath";
+        });
+}
+
+function createCounter(maxCount, index) {
     const counter = document.createElement('div');
     counter.className = 'counter';
     
     const countDisplay = document.createElement('span');
     countDisplay.className = 'count-display';
-    countDisplay.textContent = '0/' + maxCount;
-    counter.appendChild(countDisplay);
-
-    let currentCount = 0;
-    let isInitial = true;
+    
+    let currentCount = parseInt(localStorage.getItem(`wirdCount_${index}`)) || 0;
+    let isInitial = localStorage.getItem(`wirdMaxCount_${index}`) === null;
+    maxCount = parseInt(localStorage.getItem(`wirdMaxCount_${index}`)) || maxCount;
 
     function updateCount() {
         countDisplay.textContent = currentCount + '/' + maxCount;
@@ -68,6 +93,8 @@ function createCounter(maxCount) {
         } else {
             counter.classList.remove('completed');
         }
+        localStorage.setItem(`wirdCount_${index}`, currentCount);
+        localStorage.setItem(`wirdMaxCount_${index}`, maxCount);
     }
 
     function showOptions() {
@@ -84,13 +111,13 @@ function createCounter(maxCount) {
                 optionsContainer.remove();
                 isInitial = false;
 
-                // Mettre à jour tous les autres compteurs avec la même valeur initiale
                 if (oldMaxCount === 33) {
-                    document.querySelectorAll('.counter').forEach(otherCounter => {
+                    document.querySelectorAll('.counter').forEach((otherCounter, otherIndex) => {
                         const otherCountDisplay = otherCounter.querySelector('.count-display');
                         if (otherCountDisplay.textContent === '0/33') {
                             otherCounter.maxCount = option;
                             otherCountDisplay.textContent = '0/' + option;
+                            localStorage.setItem(`wirdMaxCount_${otherIndex}`, option);
                         }
                     });
                 }
@@ -113,6 +140,8 @@ function createCounter(maxCount) {
         }
     });
 
+    updateCount();
+    counter.appendChild(countDisplay);
     return counter;
 }
 
@@ -123,8 +152,7 @@ function initializeWird() {
         wirdContainer.appendChild(wirdItem);
     });
 
-    // Modifiez cette partie pour rendre les éléments wird cliquables
-    document.querySelectorAll('.wird-item').forEach(item => {
+    document.querySelectorAll('.wird-item').forEach((item, index) => {
         const counter = item.querySelector('.counter');
         if (counter) {
             item.addEventListener('click', () => {
@@ -132,6 +160,15 @@ function initializeWird() {
             });
         }
     });
+}
+
+// Ajoutez cette fonction pour réinitialiser les compteurs
+function resetAllCounters() {
+    wirdContent.forEach((_, index) => {
+        localStorage.removeItem(`wirdCount_${index}`);
+        localStorage.removeItem(`wirdMaxCount_${index}`);
+    });
+    location.reload(); // Recharge la page pour réinitialiser l'affichage
 }
 
 document.addEventListener('DOMContentLoaded', initializeWird);
@@ -182,3 +219,10 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 });
+
+// Ajoutez un bouton de réinitialisation
+const resetButton = document.createElement('button');
+resetButton.textContent = 'إعادة تعيين جميع العدادات';
+resetButton.id = 'resetButton';
+resetButton.addEventListener('click', resetAllCounters);
+document.body.appendChild(resetButton);

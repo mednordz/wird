@@ -1,13 +1,13 @@
 /* Déclarations des polices */
 @font-face {
     font-family: 'UthmanicWarsh';
-    src: url('UthmanicWarsh V21.ttf') format('truetype');
+    src: url('/wird/fonts/UthmanicWarsh\ V21.ttf') format('truetype');
     font-display: swap;
 }
 
 @font-face {
     font-family: 'Didouche';
-    src: url('Didouche_Font.ttf') format('truetype');
+    src: url('/wird/fonts/Didouche_Font.ttf') format('truetype');
     font-display: swap;
 }
 
@@ -326,6 +326,11 @@ button:hover::before {
     text-shadow: 1px 1px 1px rgba(0,0,0,0.05);
 }
 
+.bassmala img {
+    width: 100%;
+    height: auto;
+}
+
 /* Styles spécifiques pour iOS */
 /* @supports (-webkit-touch-callout: none) {
     .bassmala {
@@ -385,5 +390,22 @@ button:hover::before {
 }
 
 /* ... reste du code ... */
+
+#resetButton {
+    display: block;
+    margin: 20px auto;
+    padding: 10px 20px;
+    font-size: 18px;
+    background-color: #8B4513;
+    color: #f0e6d2;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#resetButton:hover {
+    background-color: #A0522D;
+}
 
 
