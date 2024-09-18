@@ -12,6 +12,8 @@ const wirdContent = [
     { text: "سُورَةُ الفَتْحِ", repeat: 1, surah: true }
 ];
 
+let suratAlFathContent = null; // Pour mettre en cache le contenu de Surat Al-Fath
+
 function createWirdItem(item, index) {
     const div = document.createElement('div');
     div.className = 'wird-item';
@@ -64,10 +66,14 @@ function getSurahText(surahName) {
 }
 
 function getSuratAlFath() {
+    if (suratAlFathContent) {
+        return Promise.resolve(suratAlFathContent);
+    }
     return fetch('SuratAlFath.json')
         .then(response => response.json())
         .then(data => {
-            return data.verses.map(verse => `${verse.text}`).join('\n\n');
+            suratAlFathContent = data.verses.map(verse => `${verse.text}`).join('\n\n');
+            return suratAlFathContent;
         })
         .catch(error => {
             console.error('Erreur lors du chargement de Surat Al-Fath:', error);
@@ -105,22 +111,20 @@ function createCounter(maxCount, index) {
             const button = document.createElement('button');
             button.textContent = option;
             button.addEventListener('click', () => {
-                const oldMaxCount = maxCount;
                 maxCount = option;
+                currentCount = 0;
                 updateCount();
                 optionsContainer.remove();
                 isInitial = false;
-
-                if (oldMaxCount === 33) {
-                    document.querySelectorAll('.counter').forEach((otherCounter, otherIndex) => {
+                localStorage.setItem('globalMaxCount', option);
+                document.querySelectorAll('.counter').forEach((otherCounter, otherIndex) => {
+                    if (otherIndex !== index && localStorage.getItem(`wirdMaxCount_${otherIndex}`) === '33') {
                         const otherCountDisplay = otherCounter.querySelector('.count-display');
-                        if (otherCountDisplay.textContent === '0/33') {
-                            otherCounter.maxCount = option;
-                            otherCountDisplay.textContent = '0/' + option;
-                            localStorage.setItem(`wirdMaxCount_${otherIndex}`, option);
-                        }
-                    });
-                }
+                        otherCountDisplay.textContent = '0/' + option;
+                        localStorage.setItem(`wirdMaxCount_${otherIndex}`, option);
+                        localStorage.setItem(`wirdCount_${otherIndex}`, 0);
+                    }
+                });
             });
             optionsContainer.appendChild(button);
         });
@@ -130,7 +134,15 @@ function createCounter(maxCount, index) {
     counter.addEventListener('click', (event) => {
         event.stopPropagation();
         if (isInitial && maxCount === 33) {
-            showOptions();
+            const globalMaxCount = localStorage.getItem('globalMaxCount');
+            if (globalMaxCount) {
+                maxCount = parseInt(globalMaxCount);
+                currentCount = 0;
+                updateCount();
+                isInitial = false;
+            } else {
+                showOptions();
+            }
         } else if (currentCount < maxCount) {
             currentCount++;
             updateCount();
@@ -171,58 +183,60 @@ function resetAllCounters() {
     location.reload(); // Recharge la page pour réinitialiser l'affichage
 }
 
-document.addEventListener('DOMContentLoaded', initializeWird);
+function loadFonts() {
+    const fonts = [
+        new FontFace('UthmanicWarsh', 'url(/wird/fonts/UthmanicWarsh V21.ttf)'),
+        new FontFace('Didouche', 'url(/wird/fonts/Didouche_Font.ttf)')
+    ];
+
+    return Promise.all(fonts.map(font => font.load()))
+        .then(loadedFonts => {
+            loadedFonts.forEach(font => document.fonts.add(font));
+        })
+        .catch(error => console.error('Erreur lors du chargement des polices:', error));
+}
 
 document.addEventListener('DOMContentLoaded', function() {
-    const overlay = document.getElementById('animation-overlay');
-    const img = overlay.querySelector('img');
+    Promise.all([loadFonts(), getSuratAlFath()])
+        .then(() => {
+            initializeWird();
+            // Animation d'overlay
+            const overlay = document.getElementById('animation-overlay');
+            const img = overlay.querySelector('img');
+            setTimeout(() => {
+                img.style.opacity = '1';
+                img.style.transform = 'scale(1) rotate(0deg)';
+            }, 300);
+            setTimeout(() => {
+                overlay.classList.add('fade-out');
+            }, 4000);
+            overlay.addEventListener('transitionend', function(e) {
+                if (e.propertyName === 'opacity' && this.classList.contains('fade-out')) {
+                    this.remove();
+                }
+            });
 
-    // Afficher l'image avec une animation
-    setTimeout(() => {
-        img.style.opacity = '1';
-        img.style.transform = 'scale(1) rotate(0deg)';
-    }, 300);
+            // Gestion du bouton "Afficher plus"
+            const showMoreBtn = document.getElementById('showMoreBtn');
+            const shortText = document.querySelector('.short-text');
+            const fullText = document.querySelector('.full-text');
+            showMoreBtn.addEventListener('click', function() {
+                if (fullText.style.display === 'none') {
+                    fullText.style.display = 'inline';
+                    shortText.style.display = 'none';
+                    showMoreBtn.textContent = 'عرض أقل';
+                } else {
+                    fullText.style.display = 'none';
+                    shortText.style.display = 'inline';
+                    showMoreBtn.textContent = 'عرض المزيد';
+                }
+            });
 
-    // Faire disparaître l'overlay après 4 secondes
-    setTimeout(() => {
-        overlay.classList.add('fade-out');
-    }, 4000);
-
-    // Supprimer complètement l'overlay après la fin de l'animation
-    overlay.addEventListener('transitionend', function(e) {
-        if (e.propertyName === 'opacity' && this.classList.contains('fade-out')) {
-            this.remove();
-        }
-    });
+            // Ajout du bouton de réinitialisation
+            const resetButton = document.createElement('button');
+            resetButton.textContent = 'إعادة تعيين جميع العدادات';
+            resetButton.id = 'resetButton';
+            resetButton.addEventListener('click', resetAllCounters);
+            document.body.appendChild(resetButton);
+        });
 });
-
-// Supprimez ou commentez ces lignes si elles existent
-// document.getElementById('count-button').addEventListener('click', () => {
-//     incrementWirdCount(currentWirdId);
-//     updateWirdDisplay(currentWirdId);
-// });
-
-document.addEventListener('DOMContentLoaded', function() {
-    const showMoreBtn = document.getElementById('showMoreBtn');
-    const shortText = document.querySelector('.short-text');
-    const fullText = document.querySelector('.full-text');
-
-    showMoreBtn.addEventListener('click', function() {
-        if (fullText.style.display === 'none') {
-            fullText.style.display = 'inline';
-            shortText.style.display = 'none';
-            showMoreBtn.textContent = 'عرض أقل';
-        } else {
-            fullText.style.display = 'none';
-            shortText.style.display = 'inline';
-            showMoreBtn.textContent = 'عرض المزيد';
-        }
-    });
-});
-
-// Ajoutez un bouton de réinitialisation
-const resetButton = document.createElement('button');
-resetButton.textContent = 'إعادة تعيين جميع العدادات';
-resetButton.id = 'resetButton';
-resetButton.addEventListener('click', resetAllCounters);
-document.body.appendChild(resetButton);

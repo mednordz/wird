@@ -331,15 +331,13 @@ button:hover::before {
     height: auto;
 }
 
-/* Styles spécifiques pour iOS */
+/* Styles spécifiques pour iOS
 /* @supports (-webkit-touch-callout: none) {
     .bassmala {
         /* Ajustements spécifiques pour iOS si nécessaire */
-        font-size: 18px;
+        /* font-size: 18px;
         line-height: 1.3;
-        -webkit-text-size-adjust: 100%;
-    }
-} */
+        -webkit-text-size-adjust: 100%; */
 
 /* Suppression des styles spécifiques à l'ancienne image */
 /* header img { } */
@@ -408,4 +406,32 @@ button:hover::before {
     background-color: #A0522D;
 }
 
+main h2 img {
+    max-width: 30%; /* Réduit la largeur maximale à 80% */
+    height: auto;
+    display: block;
+    margin: 0 auto;
+    filter: sepia(30%) hue-rotate(10deg) saturate(150%); /* Ajoute un effet de couleur */
+    transition: filter 0.3s ease; /* Ajoute une transition douce pour l'effet de survol */
+}
+
+main h2 img:hover {
+    filter: sepia(20%) hue-rotate(5deg) saturate(180%); /* Effet légèrement différent au survol */
+}
+
+footer {
+    text-align: center;
+    margin-top: 30px;
+    padding: 20px;
+    border-top: 1px solid #8B4513;
+    font-size: 0.9em;
+}
+
+@media (max-width: 600px) {
+    /* ... styles existants ... */
+    footer {
+        font-size: 0.8em;
+        padding: 10px;
+    }
+}
 
